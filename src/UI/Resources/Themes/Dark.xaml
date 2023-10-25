@@ -8,7 +8,9 @@
     <SolidColorBrush x:Key="Text" Color="#ffffff" />
     <SolidColorBrush x:Key="ButtonText" Color="#ffffff" />
     <SolidColorBrush x:Key="MainBackground" Color="#000" />
-    <SolidColorBrush x:Key="SecondaryBackground" Color="#FBFDFF" />
+    <SolidColorBrush x:Key="CenterColumnBackground" Color="#FAFCFF" />
+    <SolidColorBrush x:Key="RightColumnBackground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="InputBackground" Color="#FFFFFF" />
     
     <SolidColorBrush x:Key="Gray100" Color="#F9FAFB" />
     <SolidColorBrush x:Key="Gray200" Color="#F4F6F8" />
