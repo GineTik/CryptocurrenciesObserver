@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:local="clr-namespace:UI"
+        xmlns:uc="clr-namespace:UI.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1000">
     
@@ -22,35 +22,14 @@
                 <TextBlock FontSize="18" FontWeight="600" Margin="4 20 0 40" TextWrapping="Wrap" DockPanel.Dock="Top">
                     Cryptocurrencies Observer
                 </TextBlock>
-                <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-                    <Button Style="{StaticResource NavbarButtonActive}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome Icon="Home" FontSize="30" />
-                            <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="16">Home</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource NavbarButton}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome Icon="Exchange" FontSize="30" />
-                            <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="16">Convertor</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource NavbarButton}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome Icon="Question" FontSize="30" />
-                            <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="16">How to use</TextBlock>
-                        </StackPanel>
-                    </Button>
+                
+                <uc:Navbar DockPanel.Dock="Top" />
+                
+                <StackPanel VerticalAlignment="Bottom"
+                    Margin="0 0 0 10">
+                    <uc:ThemeSwitcher></uc:ThemeSwitcher>
+                    <uc:StyledButton Icon="Times" Text="Exit" Foreground="{DynamicResource Red}"/>
                 </StackPanel>
-                <Button Style="{StaticResource NavbarButton}" 
-                        Foreground="{DynamicResource Red}" 
-                        VerticalAlignment="Bottom"
-                        Margin="0 0 0 20">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-                        <fa:FontAwesome Icon="Times" FontSize="30" />
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="16">Exit</TextBlock>
-                    </StackPanel>
-                </Button>
             </DockPanel>
         </Grid>
         <Grid Grid.Column="2" Background="{DynamicResource SecondaryBackground}" Margin="20 0 20 0"></Grid>

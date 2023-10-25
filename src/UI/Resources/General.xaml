@@ -4,7 +4,7 @@
         <Setter Property="FontFamily" Value="Fonts/#Montserrat" />             
     </Style>
     
-    <Style x:Key="NavbarCommonButtonStyle" TargetType="Button">
+    <Style x:Key="CommonButtonStyle" TargetType="Control">
         <Setter Property="Margin" Value="0 0 0 10"></Setter>
         <Setter Property="Padding" Value="20 10"></Setter>
         
@@ -39,11 +39,11 @@
         </Style.Triggers>
     </Style>
     
-    <Style x:Key="NavbarButtonActive" TargetType="{x:Type Button}" BasedOn="{StaticResource NavbarCommonButtonStyle}">
+    <Style x:Key="ButtonActive" TargetType="{x:Type Control}" BasedOn="{StaticResource NavbarCommonButtonStyle}">
         <Setter Property="Foreground" Value="{DynamicResource ButtonText}"></Setter>
         <Setter Property="Background" Value="{DynamicResource Primary}"></Setter>
     </Style>
-    <Style x:Key="NavbarButton" TargetType="{x:Type Button}" BasedOn="{StaticResource NavbarCommonButtonStyle}">
+    <Style x:Key="Button" TargetType="{x:Type Control}" BasedOn="{StaticResource NavbarCommonButtonStyle}">
         <Setter Property="Foreground" Value="{DynamicResource Gray400}"></Setter>
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="BorderThickness" Value="0"></Setter>
