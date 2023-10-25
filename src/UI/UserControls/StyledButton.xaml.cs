@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using FontAwesome.WPF;
 
@@ -28,6 +30,12 @@ public partial class StyledButton
     public new static readonly DependencyProperty ForegroundProperty =
         DependencyProperty.Register(nameof(Foreground), typeof(Brush), typeof(StyledButton), new PropertyMetadata(null, OnForegroundPropertyChanged));
     
+    public static readonly DependencyProperty DataProperty =
+        DependencyProperty.Register(nameof(Data), typeof(object), typeof(StyledButton), new PropertyMetadata(null));
+    
+    public static readonly DependencyProperty CommandProperty =
+        DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(StyledButton), new PropertyMetadata(null));
+
     public string Text
     {
         get => (string)GetValue(TextProperty);
@@ -46,7 +54,7 @@ public partial class StyledButton
         set => SetValue(IsActiveProperty, value);
     }
     
-    public Action<StyledButton> Click
+    public Action<StyledButton>? Click
     {
         get => (Action<StyledButton>)GetValue(ClickProperty);
         set => SetValue(ClickProperty, value);
@@ -56,6 +64,18 @@ public partial class StyledButton
     {
         get => (Brush)GetValue(ForegroundProperty);
         set => SetValue(ForegroundProperty, value);
+    }
+    
+    public object Data
+    {
+        get => GetValue(DataProperty);
+        set => SetValue(DataProperty, value);
+    }
+    
+    public ICommand? Command
+    {
+        get => (ICommand)GetValue(CommandProperty);
+        set => SetValue(CommandProperty, value);
     }
 
     private static void OnForegroundPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
@@ -69,5 +89,7 @@ public partial class StyledButton
     private void ButtonClick(object sender, RoutedEventArgs e)
     {
         Click?.Invoke(this);
+        if (Command?.CanExecute(this) == true)
+            Command?.Execute(this);
     }
 }

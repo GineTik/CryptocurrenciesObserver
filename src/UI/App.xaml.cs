@@ -1,12 +1,14 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UI.ViewModels;
+using UI.Views;
 
 namespace UI
 {
-    public partial class App : Application
+    public partial class App
     {
-        public IHost AppHost { get; private set; }
+        private IHost AppHost { get; }
 
         public App()
         {
@@ -14,6 +16,9 @@ namespace UI
                 .ConfigureServices((_, services) =>
                 {
                     services.AddSingleton<MainWindow>();
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<HomePage>();
+                    services.AddSingleton<ConvertorPage>();
                 })
                 .Build();
         }
