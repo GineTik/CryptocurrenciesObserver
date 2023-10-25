@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:uc="clr-namespace:UI.UserControls"
+        xmlns:viewModels="clr-namespace:UI.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1000">
+        Title="MainWindow" Height="700" Width="1000"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
     
     <Grid Background="{DynamicResource MainBackground}">
         <Grid.ColumnDefinitions>
@@ -23,7 +24,7 @@
                     Cryptocurrencies Observer
                 </TextBlock>
                 
-                <uc:Navbar DockPanel.Dock="Top" />
+                <uc:Navbar DockPanel.Dock="Top" Command="{Binding SwitchActivePageCommand}" />
                 
                 <StackPanel VerticalAlignment="Bottom"
                     Margin="0 0 0 10">
@@ -33,10 +34,11 @@
             </DockPanel>
         </Grid>
         <Grid Grid.Column="2" Background="{DynamicResource CenterColumnBackground}" Margin="20 0 20 0">
-            <DockPanel Margin="20">
-                <uc:Searchbar DockPanel.Dock="Top"></uc:Searchbar>
-                <StackPanel></StackPanel>
-            </DockPanel>
+            <Frame x:Name="Frame" 
+                   Content="{Binding ActivePage}"
+                   NavigationUIVisibility="Hidden"
+                   Margin="20"
+                   VerticalAlignment="Top"/>
         </Grid>
         <Grid Grid.Column="3" Background="{DynamicResource RightColumnBackground}"></Grid>
     </Grid>

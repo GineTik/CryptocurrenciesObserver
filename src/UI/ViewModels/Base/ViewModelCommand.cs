@@ -5,16 +5,10 @@ namespace UI.ViewModels.Base;
 
 public class ViewModelCommand : ICommand
 {
-    private readonly Action<object> _executeAction;
+    private readonly Action<object?> _executeAction;
     private readonly Predicate<object?>? _canExecuteAction;
-
-    public ViewModelCommand(Action<object> executeAction)
-    {
-        _executeAction = executeAction;
-        _canExecuteAction = null;
-    }
     
-    public ViewModelCommand(Action<object> executeAction, Predicate<object?> canExecuteAction)
+    public ViewModelCommand(Action<object?> executeAction, Predicate<object?>? canExecuteAction = null)
     {
         _executeAction = executeAction;
         _canExecuteAction = canExecuteAction;
@@ -27,7 +21,7 @@ public class ViewModelCommand : ICommand
 
     public void Execute(object? parameter)
     {
-        throw new NotImplementedException();
+        _executeAction(parameter);
     }
 
     public event EventHandler? CanExecuteChanged
