@@ -13,24 +13,24 @@ public static class ThemeChanger
 {
     public static void Change(Themes theme)
     {
-        var resources = CreateResourceDictionaryByTheme(theme);
+        var resources = CreateResourceDictionary(theme);
         RemoveAllThemeResources();
-        Application.Current.Resources.MergedDictionaries.Add(resources);
+        App.Current.Resources.MergedDictionaries.Add(resources);
     }
 
     private static void RemoveAllThemeResources()
     {
         var themeResources = new ResourceDictionary[]
         {
-            CreateResourceDictionaryByTheme(Themes.Light),
-            CreateResourceDictionaryByTheme(Themes.Dark),
+            CreateResourceDictionary(Themes.Light),
+            CreateResourceDictionary(Themes.Dark),
         };
         
         foreach (var resource in themeResources)
-           Application.Current.Resources.MergedDictionaries.Remove(resource);
+           App.Current.Resources.MergedDictionaries.Remove(resource);
     }
 
-    private static ResourceDictionary CreateResourceDictionaryByTheme(Themes theme)
+    private static ResourceDictionary CreateResourceDictionary(Themes theme)
     {
         var uri = new Uri($"Resources/Themes/{theme}.xaml", UriKind.Relative);
         return new ResourceDictionary {Source = uri};
