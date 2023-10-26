@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Application;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UI.ViewModels;
@@ -19,6 +20,8 @@ namespace UI
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<HomePage>();
                     services.AddSingleton<ConvertorPage>();
+
+                    services.AddApplication();
                 })
                 .Build();
         }
