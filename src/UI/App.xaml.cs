@@ -19,6 +19,7 @@ namespace UI
                     services.AddSingleton<MainWindow>();
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<HomePage>();
+                    services.AddSingleton<HomeViewModel>();
                     services.AddSingleton<ConvertorPage>();
 
                     services.AddApplication();
