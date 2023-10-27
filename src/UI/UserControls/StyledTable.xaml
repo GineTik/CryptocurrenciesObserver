@@ -8,15 +8,17 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:StyledTable}">
     <Grid>
-        <ItemsPresenter />
-        <!-- <ItemsControl  -->
-        <!--     ItemsSource="{Binding Path=Items}" -->
-        <!--     Background="Aqua"> -->
-        <!--     <ItemsControl.ItemTemplate> -->
-        <!--         <DataTemplate> -->
-        <!--             <TextBlock Text="Test" /> -->
-        <!--         </DataTemplate> -->
-        <!--     </ItemsControl.ItemTemplate> -->
-        <!-- </ItemsControl> -->
+        <ListView ItemsSource="{Binding Items}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Index" DisplayMemberBinding="{Binding Index}" Width="100"/>
+                    <!-- Добавьте другие столбцы на основе свойств вашей коллекции -->
+                    <!-- Например: -->
+                    <!-- <GridViewColumn Header="Property1" DisplayMemberBinding="{Binding Property1}" Width="100"/> -->
+                    <!-- <GridViewColumn Header="Property2" DisplayMemberBinding="{Binding Property2}" Width="100"/> -->
+                    <!-- И так далее... -->
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

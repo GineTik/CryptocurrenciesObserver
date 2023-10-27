@@ -14,23 +14,19 @@
         <DockPanel>
             <userControls:Searchbar DockPanel.Dock="Top" />
             
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
+            <StackPanel Style="{StaticResource StyledTable}">
                 <!-- Column Headers -->
                 <ItemsControl 
                     Grid.Row="0"
+                    Style="{StaticResource StyledTableHeader}"
                     Margin="0 20 0 0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <system:String>#</system:String>
-                    <system:String>Name</system:String>
+                    <TextBlock>#</TextBlock>
+                    <TextBlock>Name</TextBlock>
                 </ItemsControl>
 
                 <ItemsControl
@@ -38,7 +34,8 @@
                     ItemsSource="{Binding Path=Coins}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Style="{StaticResource StyledTableRow}" 
+                                        Orientation="Horizontal">
                                 <TextBlock Text="{Binding MarketCupRank}"/>
                                 <TextBlock Text="{Binding Symbol}"/>
                                 <TextBlock Text="{Binding Name}"/>
@@ -52,7 +49,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </Grid>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </Page>
