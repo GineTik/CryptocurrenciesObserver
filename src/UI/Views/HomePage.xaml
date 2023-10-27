@@ -4,12 +4,51 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:userControls="clr-namespace:UI.UserControls"
+      xmlns:viewModels="clr-namespace:UI.ViewModels"
+      xmlns:system="clr-namespace:System;assembly=System.Runtime"
       mc:Ignorable="d"
-      Title="HomePage" Height="450" Width="800">
+      Title="HomePage" Height="450" Width="800"
+      d:DataContext="{d:DesignInstance viewModels:HomeViewModel}">
+    
     <Grid>
         <DockPanel>
             <userControls:Searchbar DockPanel.Dock="Top" />
-            <StackPanel></StackPanel>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Column Headers -->
+                <ItemsControl 
+                    Grid.Row="0"
+                    Margin="0 20 0 0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <system:String>#</system:String>
+                    <system:String>Name</system:String>
+                </ItemsControl>
+
+                <ItemsControl
+                    Grid.Row="1"
+                    ItemsSource="{Binding Path=Coins}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Rank}"/>
+                                <TextBlock Text="{Binding Symbol}"/>
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Image}"/>
+                                <TextBlock Text="{Binding CurrentPrice}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
         </DockPanel>
     </Grid>
 </Page>

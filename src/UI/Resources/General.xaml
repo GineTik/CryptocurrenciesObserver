@@ -2,50 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="{x:Type Window}"> 
         <Setter Property="FontFamily" Value="Fonts/#Montserrat" />             
+        <Setter Property="FontSize" Value="16" />             
     </Style>
     
-    <Style x:Key="CommonButtonStyle" TargetType="Control">
-        <Setter Property="Margin" Value="0 0 0 10"></Setter>
-        <Setter Property="Padding" Value="20 10"></Setter>
-        
-        
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Border
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="16"
-                            Background="{TemplateBinding Background}"
-                            Padding="20 10">
-                            <ContentPresenter/>
-                        </Border>
-                        <Border x:Name="overlay" CornerRadius="16" Background="#80000000" Opacity="0" />
-                    </Grid>
-                    
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="overlay" Property="Opacity" Value="0.1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-    
-    <Style x:Key="ButtonActive" TargetType="{x:Type Control}" BasedOn="{StaticResource NavbarCommonButtonStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource ButtonText}"></Setter>
-        <Setter Property="Background" Value="{DynamicResource Primary}"></Setter>
-    </Style>
-    <Style x:Key="Button" TargetType="{x:Type Control}" BasedOn="{StaticResource NavbarCommonButtonStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource Gray400}"></Setter>
-        <Setter Property="Background" Value="Transparent"></Setter>
-        <Setter Property="BorderThickness" Value="0"></Setter>
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="16" /> 
     </Style>
 </ResourceDictionary>

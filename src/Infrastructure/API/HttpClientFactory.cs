@@ -1,27 +1,27 @@
 ﻿using System;
-using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.API;
 
-public class HttpClientFactory
+public class HttpClientFactory : IHttpClientFactory
 {
-    private readonly IConfiguration _configuration;
-
-    public HttpClientFactory(IConfiguration configuration)
+    private string? _baseUri;
+    
+    public void SetBaseUri(string uri)
     {
-        _configuration = configuration;
+        _baseUri = uri;
     }
 
     public HttpClient Create()
     {
         var client = new HttpClient();
-        client.BaseAddress = new Uri("https://pro-api.coingecko.com/api/v3");
+        if (_baseUri != null)
+        {
+            client.BaseAddress = new Uri(_baseUri);
+        }
         client.DefaultRequestHeaders.Accept.Clear();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("x-cg-pro-api-key", _configuration["ApiKey"]);
         return client;
     }
 }

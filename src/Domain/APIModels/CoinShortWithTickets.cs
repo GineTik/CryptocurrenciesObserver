@@ -2,7 +2,7 @@
 
 namespace Domain.APIModels;
 
-public class CoinWithTickets
+public class CoinShortWithTickets
 {
     public string Id { get; set; } = null!;
     public string Name { get; set; } = null!;
