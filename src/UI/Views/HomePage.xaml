@@ -3,19 +3,33 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:userControls="clr-namespace:UI.UserControls"
       xmlns:viewModels="clr-namespace:UI.ViewModels"
+      xmlns:convertors="clr-namespace:UI.Convertors"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d"
       Title="HomePage"
       d:DataContext="{d:DesignInstance viewModels:HomeViewModel}">
     
     <Page.Resources>
-        <ResourceDictionary Source="../Resources/Table.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Table.xaml"/>
+                <ResourceDictionary Source="../Resources/Searchbar.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
     
     <Grid>
         <DockPanel>
-            <userControls:Searchbar DockPanel.Dock="Top" />
+            <TextBox Text="{Binding SearchText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource SearchBar}" 
+                     DockPanel.Dock="Top">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             
             <DataGrid Style="{StaticResource StyledTable}"
                       CellStyle="{StaticResource StyledCellTable}"
@@ -23,7 +37,8 @@
                       ColumnHeaderStyle="{StaticResource StyledHeaderTable}"
                       AutoGenerateColumns="False"
                       ItemsSource="{Binding Coins}"
-                      Margin="0 20 0 0">
+                      Margin="0 20 0 0"
+                      DockPanel.Dock="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Rank}" 
                                         Header="#" 
@@ -50,6 +65,11 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            
+            <TextBlock Text="Items not found"
+                       Style="{StaticResource NotFoundItemTable}"
+                       Visibility="{Binding Coins.Count, 
+                                    Converter={convertors:InputPlaceholderVisibilityConverter}}" />
         </DockPanel>
     </Grid>
 </Page>
