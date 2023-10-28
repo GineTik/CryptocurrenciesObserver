@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Reflection;
+using System.Windows;
 using Application;
 using Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UI.ViewModels;
@@ -25,6 +28,12 @@ namespace UI
 
                     services.AddApplication();
                     services.AddInfrastructure();
+                })
+                .ConfigureAppConfiguration(builder =>
+                {
+                    builder
+                        .SetBasePath(Directory.GetCurrentDirectory() + "/../../../")
+                        .AddJsonFile("appsettings.json");
                 })
                 .Build();
         }

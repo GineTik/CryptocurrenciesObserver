@@ -130,4 +130,11 @@
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
+    
+    <Style x:Key="NotFoundItemTable" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="Foreground" Value="{DynamicResource Gray600}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
 </ResourceDictionary>
