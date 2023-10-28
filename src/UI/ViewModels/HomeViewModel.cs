@@ -15,6 +15,7 @@ public class HomeViewModel : ViewModelBase
     private ObservableCollection<Coin> _coins;
     private string _searchText;
     private readonly DispatcherTimer _searchTimer;
+    private Coin? _selectedCoin;
 
     private readonly IMediator _mediator;
 
@@ -27,6 +28,7 @@ public class HomeViewModel : ViewModelBase
         _searchTimer.Tick += SearchTimerTick;
         var interval = Convert.ToInt32(configuration["SearchIntervalInMilliseconds"]);
         _searchTimer.Interval = TimeSpan.FromMilliseconds(interval);
+        _selectedCoin = null;
         
         SearchCommand = new ViewModelCommand(SearchCoins);
         SearchCommand.Execute(null);
@@ -46,6 +48,12 @@ public class HomeViewModel : ViewModelBase
         set => SetField(ref _searchText, value);
     }
     
+    public Coin? SelectedCoin
+    {
+        get => _selectedCoin;
+        set => SetField(ref _selectedCoin, value);
+    }
+
     private void SearchCoins(object? parameter)
     {
         _searchTimer.Stop();

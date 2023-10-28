@@ -38,7 +38,8 @@
                       AutoGenerateColumns="False"
                       ItemsSource="{Binding Coins}"
                       Margin="0 20 0 0"
-                      DockPanel.Dock="Top">
+                      DockPanel.Dock="Top"
+                      SelectedItem="{Binding SelectedCoin, Mode=TwoWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Rank}" 
                                         Header="#" 
@@ -69,7 +70,7 @@
             <TextBlock Text="Items not found"
                        Style="{StaticResource NotFoundItemTable}"
                        Visibility="{Binding Coins.Count, 
-                                    Converter={convertors:InputPlaceholderVisibilityConverter}}" />
+                                    Converter={convertors:LengthZeroToVisibilityConverter}}" />
         </DockPanel>
     </Grid>
 </Page>

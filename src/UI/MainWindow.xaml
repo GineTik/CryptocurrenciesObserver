@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:UI.UserControls"
         xmlns:viewModels="clr-namespace:UI.ViewModels"
+        xmlns:convertors="clr-namespace:UI.Convertors"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1000"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
+
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/Table.xaml" />
+    </Window.Resources>
     
     <Grid Background="{DynamicResource MainBackground}">
         <Grid.ColumnDefinitions>
@@ -40,6 +45,67 @@
                    Margin="20"
                    VerticalAlignment="Top"/>
         </Grid>
-        <Grid Grid.Column="3" Background="{DynamicResource RightColumnBackground}"></Grid>
+        <Grid Grid.Column="3" Background="{DynamicResource RightColumnBackground}">
+            <StackPanel Margin="20">
+                <TextBlock Text="Select item from table"
+                           Foreground="{DynamicResource Gray600}"
+                           HorizontalAlignment="Center"
+                           Visibility="{Binding HomeViewModel.SelectedCoin, 
+                                    Converter={convertors:NullVisibilityConverter},
+                                    ConverterParameter={x:Static convertors:NullConvertEnum.ToVisibility}}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                            Visibility="{Binding HomeViewModel.SelectedCoin, 
+                                    Converter={convertors:NullVisibilityConverter},
+                                    ConverterParameter={x:Static convertors:NullConvertEnum.ToCollapsed}}">
+                    <Image VerticalAlignment="Center" Width="40" Margin="0 0 20 0" Source="{Binding HomeViewModel.SelectedCoin.Image}" />
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0 0 15 0" VerticalAlignment="Center" Foreground="{DynamicResource Gray400}" FontSize="14" Text="Name" />
+                            <TextBlock Text="{Binding HomeViewModel.SelectedCoin.Name}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0 0 7 0" VerticalAlignment="Center" Foreground="{DynamicResource Gray400}" FontSize="14" Text="Symbol" />
+                            <TextBlock Text="{Binding HomeViewModel.SelectedCoin.Symbol}" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                
+                <DataGrid Style="{StaticResource StyledTable}"
+                      CellStyle="{StaticResource StyledCellTable}"
+                      RowStyle="{StaticResource StyledRowTable}"
+                      ColumnHeaderStyle="{StaticResource StyledHeaderTable}"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding Coins}"
+                      Margin="0 20 0 0"
+                      DockPanel.Dock="Top"
+                      SelectedItem="{Binding SelectedCoin, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Rank}" 
+                                        Header="#" 
+                                        IsReadOnly="True" 
+                                        CanUserResize="False" 
+                                        Width="50" />
+                    <DataGridTemplateColumn Header="Symbol/Name" IsReadOnly="True" CanUserResize="False" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center">
+                                    <Image Source="{Binding Image}"
+                                           Width="30"
+                                           Height="30"
+                                           HorizontalAlignment="Left"
+                                           Margin="0 0 10 0"/>
+                                    <TextBlock Text="{Binding Symbol}" VerticalAlignment="Center" />
+                                    <TextBlock Text=" / " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

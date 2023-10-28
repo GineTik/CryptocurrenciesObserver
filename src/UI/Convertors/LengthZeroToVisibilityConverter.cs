@@ -6,7 +6,7 @@ using System.Windows.Markup;
 
 namespace UI.Convertors;
 
-public class InputPlaceholderVisibilityConverter : MarkupExtension, IValueConverter
+public class LengthZeroToVisibilityConverter : MarkupExtension, IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

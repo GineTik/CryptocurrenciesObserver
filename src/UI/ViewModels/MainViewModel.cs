@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using Domain.APIModels;
 using Microsoft.Extensions.DependencyInjection;
 using UI.UserControls;
 using UI.ViewModels.Base;
@@ -11,11 +12,12 @@ public class MainViewModel : ViewModelBase
 {
     private readonly IServiceProvider _serviceProvider;
     private Page _activePage;
+    private readonly HomePage _homePage;
 
     public MainViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _activePage = _serviceProvider.GetRequiredService<HomePage>();
+        _activePage = _homePage = _serviceProvider.GetRequiredService<HomePage>();
 
         SwitchActivePageCommand = new ViewModelCommand(SwitchPage);
     }
@@ -25,7 +27,9 @@ public class MainViewModel : ViewModelBase
         get => _activePage;
         private set => SetField(ref _activePage, value);
     }
-    
+        
+    public HomeViewModel HomeViewModel => _homePage.HomeViewModel;
+
     public ViewModelCommand SwitchActivePageCommand { get; }
 
     private void SwitchPage(object? o)
