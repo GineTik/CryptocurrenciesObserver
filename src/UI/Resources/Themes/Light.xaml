@@ -11,6 +11,7 @@
     <SolidColorBrush x:Key="CenterColumnBackground" Color="#FAFCFF" />
     <SolidColorBrush x:Key="RightColumnBackground" Color="#FFFFFF" />
     <SolidColorBrush x:Key="InputBackground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="TableBackground" Color="#FFFFFF" />
     
     <SolidColorBrush x:Key="Gray100" Color="#F9FAFB" />
     <SolidColorBrush x:Key="Gray200" Color="#F4F6F8" />

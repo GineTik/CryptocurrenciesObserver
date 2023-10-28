@@ -4,7 +4,7 @@ using System.Text.Json;
 using Domain.APIModels;
 using Infrastructure.API.ConvertorInterfaces;
 
-namespace Infrastructure.API;
+namespace Infrastructure.API.CoinCup;
 
 public class CoinsJsonConvertor : ICoinsJsonConvertor
 {
@@ -15,13 +15,15 @@ public class CoinsJsonConvertor : ICoinsJsonConvertor
 
         foreach (var element in root.GetProperty("data").EnumerateArray())
         {
+            var symbol = element.GetProperty("symbol").GetString()!;
             yield return new Coin
             {
                 Id = element.GetProperty("id").GetString()!,
-                Symbol = element.GetProperty("symbol").GetString()!,
+                Symbol = symbol,
                 Name = element.GetProperty("name").GetString()!,
                 CurrentPrice = decimal.Parse(element.GetProperty("priceUsd").GetString()!, CultureInfo.InvariantCulture),
-                Rank = int.Parse(element.GetProperty("rank").GetString()!)
+                Rank = int.Parse(element.GetProperty("rank").GetString()!),
+                Image = $"https://assets.coincap.io/assets/icons/{symbol.ToLower()}@2x.png"
             };
         }
     }

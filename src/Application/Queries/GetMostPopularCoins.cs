@@ -26,7 +26,7 @@ public class GetMostPopularCoinsHandler : IRequestHandler<GetMostPopularCoinsQue
 
     public async Task<GetMostPopularCoinsResult> Handle(GetMostPopularCoinsQuery request, CancellationToken cancellationToken)
     {
-        var apiResult = await _api.GetMostPopularCoinsAsync();
+        var apiResult = await _api.GetMostPopularCoinsAsync(limit: 20);
         return new GetMostPopularCoinsResult(apiResult.Content, apiResult.Exception);
     }
 }
