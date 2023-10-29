@@ -8,5 +8,8 @@ public partial class HomePage
     {
         InitializeComponent();
         DataContext = homeViewModel;
+        HomeViewModel = homeViewModel;
     }
+    
+    public HomeViewModel HomeViewModel { get; }
 }

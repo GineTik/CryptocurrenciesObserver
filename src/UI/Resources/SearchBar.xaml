@@ -43,7 +43,7 @@
                                         FontSize="16"
                                         Visibility="{Binding  Text.Length, 
                                                     RelativeSource={RelativeSource TemplatedParent}, 
-                                                    Converter={convertors:InputPlaceholderVisibilityConverter}}"/>
+                                                    Converter={convertors:LengthZeroToVisibilityConverter}}"/>
                                     <ScrollViewer x:Name="PART_ContentHost" />
                                 </Grid>
                             </Grid>

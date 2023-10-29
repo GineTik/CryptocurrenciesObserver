@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using Domain.APIModels;
 
 namespace Domain.Results;
 

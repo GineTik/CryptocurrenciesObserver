@@ -4,7 +4,7 @@ using System.Text.Json;
 using Domain.APIModels;
 using Infrastructure.API.ConvertorInterfaces;
 
-namespace Infrastructure.API.CoinCup;
+namespace Infrastructure.API.CoinCap;
 
 public class CoinsJsonConvertor : ICoinsJsonConvertor
 {
