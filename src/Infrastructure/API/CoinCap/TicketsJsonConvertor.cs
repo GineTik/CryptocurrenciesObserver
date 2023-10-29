@@ -20,6 +20,7 @@ public class TicketsJsonConvertor : ITicketsJsonConvertor
                 CultureInfo.InvariantCulture,
                 out var price);
             
+            // TODO: solve the problem with the inability to compare prices
             if (isDecimal == false)
                 Console.WriteLine($"Element: {element.ToString()}, Price: {element.GetProperty("priceUsd").GetString()}");
             
