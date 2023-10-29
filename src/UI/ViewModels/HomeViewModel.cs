@@ -51,8 +51,14 @@ public class HomeViewModel : ViewModelBase
     public Coin? SelectedCoin
     {
         get => _selectedCoin;
-        set => SetField(ref _selectedCoin, value);
+        set
+        {
+            SetField(ref _selectedCoin, value);
+            if (value != null) OnCoinSelected?.Invoke(value);
+        }
     }
+
+    public Action<Coin>? OnCoinSelected { get; set; }
 
     private void SearchCoins(object? parameter)
     {

@@ -32,10 +32,6 @@
             </TextBox>
             
             <DataGrid Style="{StaticResource StyledTable}"
-                      CellStyle="{StaticResource StyledCellTable}"
-                      RowStyle="{StaticResource StyledRowTable}"
-                      ColumnHeaderStyle="{StaticResource StyledHeaderTable}"
-                      AutoGenerateColumns="False"
                       ItemsSource="{Binding Coins}"
                       Margin="0 20 0 0"
                       DockPanel.Dock="Top"

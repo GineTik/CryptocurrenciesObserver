@@ -46,17 +46,26 @@
                    VerticalAlignment="Top"/>
         </Grid>
         <Grid Grid.Column="3" Background="{DynamicResource RightColumnBackground}">
-            <StackPanel Margin="20">
-                <TextBlock Text="Select item from table"
-                           Foreground="{DynamicResource Gray600}"
-                           HorizontalAlignment="Center"
-                           Visibility="{Binding HomeViewModel.SelectedCoin, 
+            <TextBlock Text="Select item from table"
+                       Foreground="{DynamicResource Gray600}"
+                       HorizontalAlignment="Center"
+                       Margin="0 20 0 0"
+                       Visibility="{Binding HomeViewModel.SelectedCoin, 
                                     Converter={convertors:NullVisibilityConverter},
                                     ConverterParameter={x:Static convertors:NullConvertEnum.ToVisibility}}" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
-                            Visibility="{Binding HomeViewModel.SelectedCoin, 
+            <Grid Margin="20"
+                       Visibility="{Binding HomeViewModel.SelectedCoin, 
                                     Converter={convertors:NullVisibilityConverter},
                                     ConverterParameter={x:Static convertors:NullConvertEnum.ToCollapsed}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal" 
+                            HorizontalAlignment="Center"
+                            DockPanel.Dock="Top">
                     <Image VerticalAlignment="Center" Width="40" Margin="0 0 20 0" Source="{Binding HomeViewModel.SelectedCoin.Image}" />
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -69,43 +78,38 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                
-                <DataGrid Style="{StaticResource StyledTable}"
-                      CellStyle="{StaticResource StyledCellTable}"
-                      RowStyle="{StaticResource StyledRowTable}"
-                      ColumnHeaderStyle="{StaticResource StyledHeaderTable}"
-                      AutoGenerateColumns="False"
-                      ItemsSource="{Binding Coins}"
-                      Margin="0 20 0 0"
-                      DockPanel.Dock="Top"
-                      SelectedItem="{Binding SelectedCoin, Mode=TwoWay}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Rank}" 
-                                        Header="#" 
-                                        IsReadOnly="True" 
-                                        CanUserResize="False" 
-                                        Width="50" />
-                    <DataGridTemplateColumn Header="Symbol/Name" IsReadOnly="True" CanUserResize="False" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center">
-                                    <Image Source="{Binding Image}"
-                                           Width="30"
-                                           Height="30"
-                                           HorizontalAlignment="Left"
-                                           Margin="0 0 10 0"/>
-                                    <TextBlock Text="{Binding Symbol}" VerticalAlignment="Center" />
-                                    <TextBlock Text=" / " VerticalAlignment="Center" />
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-            </StackPanel>
+                <DataGrid Grid.Row="1" Style="{StaticResource StyledTable}"
+                          ItemsSource="{Binding Tickets}"
+                          Margin="0 20 0 0"
+                          DockPanel.Dock="Top">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Ticket" IsReadOnly="True" CanUserResize="False" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding BaseSymbol}" VerticalAlignment="Center" />
+                                        <TextBlock Text=" / " VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding TargetSymbol}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding ExchangeName}" 
+                                            Header="Exchanges" 
+                                            IsReadOnly="True" 
+                                            CanUserResize="False" 
+                                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <uc:StyledButton Icon="AngleRight" 
+                                 Text="More" 
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Bottom"
+                                 IsActive="True"
+                                 Grid.Row="2" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>

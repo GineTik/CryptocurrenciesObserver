@@ -8,6 +8,6 @@ namespace Application.Interfaces;
 public interface ICryptocurrenciesApi
 {
     Task<ApiResult<IEnumerable<Coin>>> GetMostPopularCoinsAsync(string? symbolOrName = null, int? limit = 10);
-    Task<ApiResult<CoinShortWithTickets>> GetCoinInfoAsync(string id);
+    Task<ApiResult<IEnumerable<Ticket>>> GetCoinTicketsAsync(string id);
     Task<ApiResult<Exchange>> GetFullExchangeInfoAsync(string id);
 }
