@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Infrastructure.API;
+namespace Infrastructure.API.HttpClientFactory;
 
 public interface IHttpClientFactory
 {

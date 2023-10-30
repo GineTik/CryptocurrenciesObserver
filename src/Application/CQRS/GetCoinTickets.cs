@@ -7,10 +7,10 @@ using Domain.APIModels;
 using Domain.Results;
 using MediatR;
 
-namespace Application.Queries;
+namespace Application.CQRS;
 
 public record GetCoinTicketsResult(IEnumerable<Ticket> Content, Exception? Exception) 
-    : QueryResult<IEnumerable<Ticket>>(Content, Exception);
+    : ApiResult<IEnumerable<Ticket>>(Content, Exception);
 
 public record GetCoinTicketsRequest(string Id) : IRequest<GetCoinTicketsResult>;
 

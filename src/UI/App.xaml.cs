@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using System;
+using System.IO;
 using System.Windows;
 using Application;
 using Infrastructure;
@@ -21,11 +21,14 @@ namespace UI
                 .ConfigureServices((_, services) =>
                 {
                     services.AddSingleton<MainWindow>();
-                    services.AddSingleton<MainViewModel>();
                     services.AddSingleton<HomePage>();
-                    services.AddSingleton<HomeViewModel>();
                     services.AddSingleton<ConvertorPage>();
-
+                    services.AddTransient<CoinInformationPage>();
+                    
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<HomeViewModel>();
+                    services.AddTransient<CoinInformationViewModel>();
+                    
                     services.AddApplication();
                     services.AddInfrastructure();
                 })
@@ -41,7 +44,7 @@ namespace UI
         protected override async void OnStartup(StartupEventArgs e)
         {
             await AppHost.StartAsync();
-
+                
             var startupWindow = AppHost.Services.GetRequiredService<MainWindow>();
             startupWindow.Show();
 

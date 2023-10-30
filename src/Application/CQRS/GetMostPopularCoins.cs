@@ -7,10 +7,10 @@ using Domain.APIModels;
 using Domain.Results;
 using MediatR;
 
-namespace Application.Queries;
+namespace Application.CQRS;
 
 public record GetMostPopularCoinsResult(IEnumerable<Coin> Content, Exception? Exception) 
-    : QueryResult<IEnumerable<Coin>>(Content, Exception);
+    : RequestResult<IEnumerable<Coin>>(Content, Exception);
 
 public record GetMostPopularCoinsQuery(string? SymbolOrName = null) : IRequest<GetMostPopularCoinsResult>;
 

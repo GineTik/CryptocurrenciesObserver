@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using Application.Queries;
+using Application.CQRS;
 using Domain.APIModels;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -76,12 +76,20 @@ public class HomeViewModel : ViewModelBase
     {
         Task.Run(async () =>
         {
-            var result = await _mediator.Send(new GetMostPopularCoinsQuery(SearchText));
+            try
+            {
+                var result = await _mediator.Send(new GetMostPopularCoinsQuery(SearchText));
 
-            if (result.Successfully)
-                Coins = new ObservableCollection<Coin>(result.Content);
-            else
-                Console.WriteLine(result.Exception!.Message);
+                if (result.Successfully)
+                    Coins = new ObservableCollection<Coin>(result.Content);
+                else
+                    Console.WriteLine(result.Exception!.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         });
     }
 }
