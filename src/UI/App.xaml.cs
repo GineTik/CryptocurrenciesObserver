@@ -24,6 +24,8 @@ namespace UI
                     services.AddSingleton<HomePage>();
                     services.AddSingleton<ConvertorPage>();
                     services.AddTransient<CoinInformationPage>();
+                    services.AddTransient<HistoryPage>();
+                    services.AddTransient<QuestionPage>();
                     
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<HomeViewModel>();

@@ -25,35 +25,22 @@
                     Click="NavbarButtonClick"
                     Command="{Binding Command,
                         RelativeSource={RelativeSource AncestorType={x:Type local:Navbar}}}"
-                    CommandParameter="{x:Type views:ConvertorPage}">
+                    CommandParameter="{x:Type views:HistoryPage}">
                 <StackPanel Orientation="Horizontal">
-                    <fa:FontAwesome Icon="Exchange" />
-                    <TextBlock Text="Convertor" />
+                    <fa:FontAwesome Icon="History" />
+                    <TextBlock Text="History" />
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource GrayButton}"
                     Click="NavbarButtonClick"
                     Command="{Binding Command,
                     RelativeSource={RelativeSource AncestorType={x:Type local:Navbar}}}"
-                    CommandParameter="{x:Type views:HomePage}">
+                    CommandParameter="{x:Type views:QuestionPage}">
                 <StackPanel Orientation="Horizontal">
                     <fa:FontAwesome Icon="Question" />
                     <TextBlock Text="Question" />
                 </StackPanel>
             </Button>
-            
-            <!-- <local:StyledButton  -->
-            <!--     Icon="Exchange"  -->
-            <!--     Text="Convertor" -->
-            <!--     Click="NavbarButtonClick"  -->
-            <!--     Command="{Binding Command, RelativeSource={RelativeSource AncestorType={x:Type local:Navbar}}}" -->
-            <!--     Data="{x:Type views:ConvertorPage}"/> -->
-            <!-- <local:StyledButton  -->
-            <!--     Icon="Question"  -->
-            <!--     Text="Question"  -->
-            <!--     Click="NavbarButtonClick" -->
-            <!--     Command="{Binding Command, RelativeSource={RelativeSource AncestorType={x:Type local:Navbar}}}" -->
-            <!--     Data="{x:Type views:HomePage}"/> -->
         </StackPanel>
     </Grid>
 </UserControl>
