@@ -6,6 +6,8 @@
         xmlns:uc="clr-namespace:UI.UserControls"
         xmlns:viewModels="clr-namespace:UI.ViewModels"
         xmlns:convertors="clr-namespace:UI.Convertors"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:views="clr-namespace:UI.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1000"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
@@ -16,11 +18,11 @@
     
     <Grid Background="{DynamicResource MainBackground}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="150"></ColumnDefinition>
-            <ColumnDefinition Width="500"></ColumnDefinition>
-            <ColumnDefinition Width="250"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
         <Grid Grid.Column="1">
@@ -29,11 +31,12 @@
                     Cryptocurrencies Observer
                 </TextBlock>
                 
-                <uc:Navbar DockPanel.Dock="Top" Command="{Binding SwitchActivePageCommand}" />
+                <uc:Navbar DockPanel.Dock="Top" 
+                           Command="{Binding SwitchActivePageCommand}" />
                 
                 <StackPanel VerticalAlignment="Bottom"
                     Margin="0 0 0 10">
-                    <uc:ThemeSwitcher></uc:ThemeSwitcher>
+                    <uc:ThemeSwitcher />
                     <uc:StyledButton Icon="Times" Text="Exit" Foreground="{DynamicResource Red}"/>
                 </StackPanel>
             </DockPanel>
@@ -96,19 +99,31 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding ExchangeName}" 
-                                            Header="Exchanges" 
-                                            IsReadOnly="True" 
-                                            CanUserResize="False" 
-                                            Width="*" />
+                        <DataGridTemplateColumn Header="Exchange" IsReadOnly="True" CanUserResize="False" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource Link}"
+                                            Content="{Binding ExchangeName}"
+                                            Command="{Binding DataContext.CoinInformationViewModel.OpenExchangeLinkCommand,
+                                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding ExchangeName}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <uc:StyledButton Icon="AngleRight" 
-                                 Text="More" 
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Bottom"
-                                 IsActive="True"
-                                 Grid.Row="2" />
+                <Button Style="{StaticResource PrimaryButton}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        Grid.Row="2"
+                        Command="{Binding SwitchActivePageCommand}"
+                        CommandParameter="{x:Type views:CoinInformationPage }">
+                   <StackPanel Orientation="Horizontal">
+                       <fa:FontAwesome Icon="AngleRight" />
+                       <TextBlock Text="More about " />
+                       <TextBlock Text="{Binding HomeViewModel.SelectedCoin.Name}" />
+                   </StackPanel>
+                </Button>
             </Grid>
         </Grid>
     </Grid>

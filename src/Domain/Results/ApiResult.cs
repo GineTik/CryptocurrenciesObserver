@@ -5,18 +5,16 @@ using Domain.APIModels;
 
 namespace Domain.Results;
 
-public record ApiResult<TContent>(TContent Content, HttpRequestException? Exception = null)
-    where TContent : class
-{
-    public bool Successfully => Exception == null;
-};
+public record ApiResult<TContent>(TContent Content, Exception? Exception = null) 
+    : RequestResult<TContent>(Content, Exception)
+    where TContent : class;
 
 public static class ApiResult
 {
     public static ApiResult<TContent> Content<TContent>(TContent content) where TContent : class =>
         new ApiResult<TContent>(content);
 
-    public static ApiResult<TContent> Exception<TContent>(HttpRequestException exception) where TContent : class =>
+    public static ApiResult<TContent> Exception<TContent>(Exception exception) where TContent : class =>
         new ApiResult<TContent>(null!, exception);
 
     public static ApiResult<TContent> Exception<TContent>(HttpResponseMessage responseMessage) where TContent : class =>

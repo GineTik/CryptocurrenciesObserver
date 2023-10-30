@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace UI.UserControls;
 
 public partial class Navbar
 {
-    private StyledButton _currentStyledButton;
+    private Button _currentStyledButton;
     
     public Navbar()
     {
@@ -16,23 +17,14 @@ public partial class Navbar
         if (NavbarPanel.Children.Count == 0)
             throw new InvalidOperationException("Navbar items is 0");
 
-        if (NavbarPanel.Children[0] is not StyledButton styledButton)
+        if (NavbarPanel.Children[0] is not Button styledButton)
             throw new InvalidDataException("Navbar should contains only NavbarButton elements");
 
         _currentStyledButton = styledButton;
     }
-
-    public static readonly DependencyProperty ItemSelectedProperty =
-        DependencyProperty.Register(nameof(ItemSelected), typeof(Action<StyledButton>), typeof(Navbar), new PropertyMetadata(null));
-
+    
     public static readonly DependencyProperty CommandProperty =
         DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(Navbar), new PropertyMetadata(null));
-    
-    public Action<StyledButton> ItemSelected
-    {
-        get => (Action<StyledButton>)GetValue(ItemSelectedProperty);
-        set => SetValue(ItemSelectedProperty, value);
-    }
     
     public ICommand Command
     {
@@ -40,15 +32,17 @@ public partial class Navbar
         set => SetValue(CommandProperty, value);
     }
 
-    private void NavbarButtonClick(StyledButton sender)
+    private void NavbarButtonClick(object o, RoutedEventArgs routedEventArgs)
     {
-        if (sender.IsActive == true)
+        var button = o as Button ?? throw new InvalidCastException($"{o.GetType()} is not Button");
+        var grayButtonStyle = System.Windows.Application.Current.FindResource("GrayButton") as Style;
+        var primaryButtonStyle = System.Windows.Application.Current.FindResource("PrimaryButton") as Style;
+
+        if (button.Style == primaryButtonStyle)
             return;
         
-        sender.IsActive = true;
-        _currentStyledButton.IsActive = false;
-        _currentStyledButton = sender;
-
-        ItemSelected?.Invoke(sender);
+        button.Style = primaryButtonStyle;
+        _currentStyledButton.Style = grayButtonStyle;
+        _currentStyledButton = button;
     }
 }
