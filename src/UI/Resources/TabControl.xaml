@@ -14,6 +14,7 @@
                 <Setter Property="BorderThickness" Value="0 0 0 2" />
                 <Setter Property="BorderBrush" Value="Transparent" />
                 <Setter Property="Background" Value="{DynamicResource CenterColumnBackground}" />
+                <Setter Property="Foreground" Value="{DynamicResource Text}" />
                 
                 <Setter Property="Template">
                     <Setter.Value>

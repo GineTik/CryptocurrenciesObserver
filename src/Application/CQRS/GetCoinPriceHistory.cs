@@ -15,7 +15,7 @@ public record GetCoinPriceHistoryResult(IEnumerable<CoinPriceHistory> Content, E
 
 public record GetCoinPriceHistoryRequest(string Id, TradesHistoryIntervals Intervals) : IRequest<GetCoinPriceHistoryResult>;
 
-internal class GetCoinPriceHistoryHandler : IRequestHandler<GetCoinPriceHistoryRequest, GetCoinPriceHistoryResult>
+public class GetCoinPriceHistoryHandler : IRequestHandler<GetCoinPriceHistoryRequest, GetCoinPriceHistoryResult>
 {
     private readonly ICryptocurrenciesApi _api;
 

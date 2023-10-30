@@ -22,4 +22,7 @@
     <SolidColorBrush x:Key="Gray700" Color="#454F5B" />
     <SolidColorBrush x:Key="Gray800" Color="#212B36" />
     <SolidColorBrush x:Key="Gray900" Color="#161C24" />
+    
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#000000"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#000000"/>
 </ResourceDictionary>
