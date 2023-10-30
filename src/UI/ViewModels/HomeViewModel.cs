@@ -78,7 +78,7 @@ public class HomeViewModel : ViewModelBase
         {
             try
             {
-                var result = await _mediator.Send(new GetMostPopularCoinsQuery(SearchText));
+                var result = await _mediator.Send(new GetMostPopularCoinsRequest(SearchText));
 
                 if (result.Successfully)
                     Coins = new ObservableCollection<Coin>(result.Content);

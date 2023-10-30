@@ -73,11 +73,13 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Margin="0 0 15 0" VerticalAlignment="Center" Foreground="{DynamicResource Gray400}" FontSize="14" Text="Name" />
-                            <TextBlock Text="{Binding HomeViewModel.SelectedCoin.Name}" />
+                            <TextBlock Foreground="{DynamicResource Text}"
+                                       Text="{Binding HomeViewModel.SelectedCoin.Name}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Margin="0 0 7 0" VerticalAlignment="Center" Foreground="{DynamicResource Gray400}" FontSize="14" Text="Symbol" />
-                            <TextBlock Text="{Binding HomeViewModel.SelectedCoin.Symbol}" />
+                            <TextBlock Foreground="{DynamicResource Text}"
+                                       Text="{Binding HomeViewModel.SelectedCoin.Symbol}" />
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

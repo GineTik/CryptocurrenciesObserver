@@ -9,7 +9,7 @@ namespace Application.CQRS;
 
 public record GetExchangeRequest(string Id) : IRequest<RequestResult<Exchange>>;
 
-internal class GetExchangeHandler : IRequestHandler<GetExchangeRequest, RequestResult<Exchange>>
+public class GetExchangeHandler : IRequestHandler<GetExchangeRequest, RequestResult<Exchange>>
 {
     private readonly ICryptocurrenciesApi _api;
 

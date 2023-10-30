@@ -12,9 +12,9 @@ namespace Application.CQRS;
 public record GetMostPopularCoinsResult(IEnumerable<Coin> Content, Exception? Exception) 
     : RequestResult<IEnumerable<Coin>>(Content, Exception);
 
-public record GetMostPopularCoinsQuery(string? SymbolOrName = null) : IRequest<GetMostPopularCoinsResult>;
+public record GetMostPopularCoinsRequest(string? SymbolOrName = null) : IRequest<GetMostPopularCoinsResult>;
 
-public class GetMostPopularCoinsHandler : IRequestHandler<GetMostPopularCoinsQuery, GetMostPopularCoinsResult>
+public class GetMostPopularCoinsHandler : IRequestHandler<GetMostPopularCoinsRequest, GetMostPopularCoinsResult>
 {
     private readonly ICryptocurrenciesApi _api;
 
@@ -23,7 +23,7 @@ public class GetMostPopularCoinsHandler : IRequestHandler<GetMostPopularCoinsQue
         _api = api;
     }
 
-    public async Task<GetMostPopularCoinsResult> Handle(GetMostPopularCoinsQuery request, CancellationToken cancellationToken)
+    public async Task<GetMostPopularCoinsResult> Handle(GetMostPopularCoinsRequest request, CancellationToken cancellationToken)
     {
         var apiResult = await _api.GetMostPopularCoinsAsync(symbolOrName: request.SymbolOrName, limit: 20);
         return new GetMostPopularCoinsResult(apiResult.Content, apiResult.Exception);
