@@ -37,7 +37,15 @@
                 <StackPanel VerticalAlignment="Bottom"
                     Margin="0 0 0 10">
                     <uc:ThemeSwitcher />
-                    <uc:StyledButton Icon="Times" Text="Exit" Foreground="{DynamicResource Red}"/>
+                    
+                    <Button Style="{StaticResource GrayButton}"
+                            Foreground="{DynamicResource Red}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Times" />
+                            <TextBlock Text="Exit" />
+                        </StackPanel>
+                    </Button>
+                    <!-- <uc:StyledButton Icon="Times" Text="Exit" Foreground="{DynamicResource Red}"/> -->
                 </StackPanel>
             </DockPanel>
         </Grid>

@@ -17,13 +17,13 @@ public partial class ThemeSwitcher
         _darkButton = FindResource("ToDarkButton") as ControlTemplate ?? throw new InvalidOperationException();
     }
 
-    private void SetLightTheme(StyledButton sender)
+    private void SetLightTheme(object o, RoutedEventArgs routedEventArgs)
     {
         ThemeChanger.Change(Themes.Light);
         ThemeButton.Template = _darkButton;
     }
 
-    private void SetDarkTheme(StyledButton sender)
+    private void SetDarkTheme(object o, RoutedEventArgs routedEventArgs)
     {
         ThemeChanger.Change(Themes.Dark);
         ThemeButton.Template = _lightButton;

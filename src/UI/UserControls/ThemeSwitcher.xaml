@@ -4,15 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:userControls="clr-namespace:UI.UserControls"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d"
              d:DesignWidth="300">
     
     <UserControl.Resources>
         <ControlTemplate x:Key="ToLightButton" TargetType="{x:Type Control}">
-            <userControls:StyledButton Icon="SunOutline" Text="To light" Click="SetLightTheme" />
+            <Button Style="{StaticResource GrayButton}"
+                    Click="SetLightTheme">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="SunOutline" />
+                    <TextBlock Text="To light" />
+                </StackPanel>
+            </Button>
         </ControlTemplate>
         <ControlTemplate x:Key="ToDarkButton" TargetType="{x:Type Control}">
-            <userControls:StyledButton Icon="MoonOutline" Text="To dark" Click="SetDarkTheme" />
+            <Button Style="{StaticResource GrayButton}"
+                    Click="SetDarkTheme">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="MoonOutline" />
+                    <TextBlock Text="To dark" />
+                </StackPanel>
+            </Button>
         </ControlTemplate>
     </UserControl.Resources>
     
