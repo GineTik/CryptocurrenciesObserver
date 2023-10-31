@@ -10,12 +10,9 @@ using MediatR;
 
 namespace Application.CQRS;
 
-public record GetCoinPriceHistoryResult(IEnumerable<CoinPriceHistory> Content, Exception? Exception = null)
-    : ApiResult<IEnumerable<CoinPriceHistory>>(Content, Exception);
+public record GetCoinPriceHistoryRequest(string Id, TradesHistoryIntervals Intervals) : IRequest<RequestResult<IEnumerable<CoinPriceHistory>>>;
 
-public record GetCoinPriceHistoryRequest(string Id, TradesHistoryIntervals Intervals) : IRequest<GetCoinPriceHistoryResult>;
-
-public class GetCoinPriceHistoryHandler : IRequestHandler<GetCoinPriceHistoryRequest, GetCoinPriceHistoryResult>
+public class GetCoinPriceHistoryHandler : IRequestHandler<GetCoinPriceHistoryRequest, RequestResult<IEnumerable<CoinPriceHistory>>>
 {
     private readonly ICryptocurrenciesApi _api;
 
@@ -24,9 +21,8 @@ public class GetCoinPriceHistoryHandler : IRequestHandler<GetCoinPriceHistoryReq
         _api = api;
     }
 
-    public async Task<GetCoinPriceHistoryResult> Handle(GetCoinPriceHistoryRequest request, CancellationToken cancellationToken)
+    public async Task<RequestResult<IEnumerable<CoinPriceHistory>>> Handle(GetCoinPriceHistoryRequest request, CancellationToken cancellationToken)
     {
-        var result = await _api.GetTradesHistoryAsync(request.Id, request.Intervals);
-        return new GetCoinPriceHistoryResult(result.Content, result.Exception);
+        return await _api.GetTradesHistoryAsync(request.Id, request.Intervals);
     }
 }

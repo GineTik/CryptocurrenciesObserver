@@ -9,12 +9,12 @@ using MediatR;
 
 namespace Application.CQRS;
 
-public record GetMostPopularCoinsResult(IEnumerable<Coin> Content, Exception? Exception) 
-    : RequestResult<IEnumerable<Coin>>(Content, Exception);
+// public record GetMostPopularCoinsResult(IEnumerable<Coin> Content, Exception? Exception) 
+//     : RequestResult<IEnumerable<Coin>>(Content, Exception);
 
-public record GetMostPopularCoinsRequest(string? SymbolOrName = null) : IRequest<GetMostPopularCoinsResult>;
+public record GetMostPopularCoinsRequest(string? SymbolOrName = null) : IRequest<RequestResult<IEnumerable<Coin>>>;
 
-public class GetMostPopularCoinsHandler : IRequestHandler<GetMostPopularCoinsRequest, GetMostPopularCoinsResult>
+public class GetMostPopularCoinsHandler : IRequestHandler<GetMostPopularCoinsRequest, RequestResult<IEnumerable<Coin>>>
 {
     private readonly ICryptocurrenciesApi _api;
 
@@ -23,9 +23,8 @@ public class GetMostPopularCoinsHandler : IRequestHandler<GetMostPopularCoinsReq
         _api = api;
     }
 
-    public async Task<GetMostPopularCoinsResult> Handle(GetMostPopularCoinsRequest request, CancellationToken cancellationToken)
+    public async Task<RequestResult<IEnumerable<Coin>>> Handle(GetMostPopularCoinsRequest request, CancellationToken cancellationToken)
     {
-        var apiResult = await _api.GetMostPopularCoinsAsync(symbolOrName: request.SymbolOrName, limit: 20);
-        return new GetMostPopularCoinsResult(apiResult.Content, apiResult.Exception);
+        return await _api.GetMostPopularCoinsAsync(symbolOrName: request.SymbolOrName, limit: 20);
     }
 }
